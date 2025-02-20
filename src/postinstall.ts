@@ -1,13 +1,8 @@
 import { execa } from "execa";
-import { createWriteStream } from "fs";
-import { chmodSync } from "fs";
 import path from "path";
-import https from "https";
+import fs from "fs";
 import os from "os";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import https from "https";
 
 const PLATFORM_MAP: { [key: string]: string } = {
   darwin: "mac",
@@ -26,19 +21,24 @@ async function downloadViu() {
   }
 
   const fileName = platform === "windows" ? "viu.exe" : "viu";
-  const url = `${BASE_URL}/viu-${platform}`;
-  const filePath = path.join(__dirname, "..", "bin", fileName);
+  const installPath = path.join(process.cwd(), "bin");
+  const filePath = path.join(installPath, fileName);
 
+  if (!fs.existsSync(installPath)) {
+    fs.mkdirSync(installPath, { recursive: true });
+  }
+
+  const url = `${BASE_URL}/viu-${platform}`;
   console.log(`Downloading viu from ${url}...`);
 
   return new Promise<void>((resolve, reject) => {
-    const file = createWriteStream(filePath);
+    const file = fs.createWriteStream(filePath);
     https
       .get(url, (response) => {
         response.pipe(file);
         file.on("finish", () => {
           file.close();
-          chmodSync(filePath, 0o755); // Make executable
+          fs.chmodSync(filePath, 0o755);
           console.log(`viu downloaded to ${filePath}`);
           resolve();
         });

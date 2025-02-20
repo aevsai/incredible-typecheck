@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { execa } from "execa";
 import chalk from "chalk";
 import path from "path";
@@ -13,8 +15,8 @@ const IMAGE_DIR = path.resolve(__dirname, "images");
 // Threshold-based images for increasing errors
 const IMAGE_THRESHOLDS: { limit: number; image: string }[] = [
   { limit: 0, image: "ok.webp" }, // No errors
-  { limit: 5, image: "woops.webp" }, // Few errors
-  { limit: 10, image: "thats bad.webp" }, // More errors
+  { limit: 3, image: "woops.webp" }, // Few errors
+  { limit: 7, image: "thats bad.webp" }, // More errors
   { limit: Infinity, image: "help pls.webp" }, // Too many errors
 ];
 
@@ -48,6 +50,7 @@ async function displayImage(imageFile: string) {
   }
   console.clear();
   console.log(chalk.blue(`Displaying image: ${imageFile}`));
+  console.log(chalk.blue(`Directory: ${process.cwd()}`));
   await execa("viu", [imagePath], { stdio: "inherit" });
 }
 
@@ -79,9 +82,9 @@ async function runTypeCheck() {
 }
 
 async function watchFiles() {
-  console.log(chalk.blue("Watching for file changes..."));
+  console.log(chalk.blue("Watching for file changes...", process.cwd()));
 
-  chokidar.watch("src/**/*.ts").on("change", async (filePath) => {
+  chokidar.watch("src").on("change", async (filePath) => {
     console.log(chalk.cyan(`File changed: ${filePath}`));
     await runTypeCheck();
   });

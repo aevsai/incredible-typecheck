@@ -3,12 +3,23 @@
   "type": "module",
   "version": "1.0.0",
   "description": "TypeScript error checker with ASCII art",
+  "main": "dist/typecheck.js",
   "bin": {
-    "typecheck": "./bin/typecheck.js"
+    "incredible-typecheck": "dist/typecheck.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aevsai/incredible-typecheck.git"
+  },
+  "files": [
+    "dist",
+    "dist/images"
+  ],
   "scripts": {
+    "build": "tsc && cp -r src/images dist/",
+    "prepublishOnly": "npm run build",
     "start": "ts-node bin/typecheck.ts",
-    "postinstall": "ts-node scripts/postinstall.ts"
+    "postinstall": "node dist/postinstall.js"
   },
   "dependencies": {
     "chalk": "^5.4.1",
