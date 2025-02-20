@@ -20,23 +20,12 @@ Then incredible-typecheck is here to judge your code.
 [ ] Uses Git history to tell you if you’re getting worse.
 [ ] Congratulates you with 🎉 when you fix stuff (rare).
 
-📦 Installation
+📦 Installation and usage
 
+```bash
 npm install -g incredible-typecheck
-
-Or for those who fear commitment:
-
-npx incredible-typecheck
-
-⚡ Usage
-
-Just run:
-
-typecheck
-
-Or, if you’re feeling brave:
-
-npx typecheck
+incredible-typecheck
+```
 
 🚀 Now watch in horror as:
 	•	Your type errors increase → You get scarier images. 👻
