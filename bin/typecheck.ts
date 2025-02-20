@@ -20,16 +20,18 @@ const IMAGE_THRESHOLDS: { limit: number; image: string }[] = [
 
 // Different images for improvements
 const CONGRATS_IMAGES: { limit: number; image: string }[] = [
-  { limit: 1, image: "nice.png" }, // Small improvement
-  { limit: 5, image: "well done.png" }, // Medium improvement
-  { limit: Infinity, image: "legend.png" }, // Huge improvement
+  { limit: 1, image: "nice.webp" }, // Small improvement
+  { limit: 5, image: "well done.webp" }, // Medium improvement
+  { limit: Infinity, image: "legend.webp" }, // Huge improvement
 ];
 
 let lastErrorCount: number | null = null;
-
 async function getErrorCount(): Promise<number> {
   try {
-    const { stdout } = await execa("tsc", ["--noEmit"], { reject: false });
+    const { stdout } = await execa("tsc", ["--noEmit"], {
+      cwd: process.cwd(),
+      reject: false,
+    });
     const match = stdout.match(/error TS\d+: /g);
     return match ? match.length : 0;
   } catch (error) {
