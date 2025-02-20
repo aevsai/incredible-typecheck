@@ -14,11 +14,11 @@ Then incredible-typecheck is here to judge your code.
 
 🔥 Features
 
-✅ Watches your TypeScript project like an overprotective parent.
-✅ Counts your type errors (and reminds you of your sins).
-✅ Displays dramatic images based on how bad things are.
-[ ] Uses Git history to tell you if you’re getting worse.
-[ ] Congratulates you with 🎉 when you fix stuff (rare).
+- [x] Watches your TypeScript project like an overprotective parent.
+- [x] Counts your type errors (and reminds you of your sins).
+- [x] Displays dramatic images based on how bad things are.
+- [ ] Uses Git history to tell you if you’re getting worse.
+- [ ] Congratulates you with 🎉 when you fix stuff (rare).
 
 📦 Installation and usage
 
