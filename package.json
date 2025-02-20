@@ -1,0 +1,21 @@
+{
+  "name": "incredible-typecheck",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "TypeScript error checker with ASCII art",
+  "bin": {
+    "typecheck": "./bin/typecheck.js"
+  },
+  "scripts": {
+    "postinstall": "ts-node scripts/postinstall.ts"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "chokidar": "^4.0.3",
+    "execa": "^7.2.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  }
+}
